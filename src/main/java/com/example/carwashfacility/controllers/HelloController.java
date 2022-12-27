@@ -16,4 +16,10 @@ public class HelloController {
     public ResponseEntity<String> sayGoodBye() {
         return ResponseEntity.ok("Good Bye");
     }
+
+ /*   @GetMapping("/users")
+    public ResponseEntity<User> getUsers() {
+        return ResponseEntity.ok();
+    }
+*/
 }

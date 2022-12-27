@@ -1,6 +1,6 @@
 package com.example.carwashfacility.configs;
 
-import com.example.carwashfacility.daos.UserDao;
+import com.example.carwashfacility.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.annotation.Order;
@@ -17,6 +17,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -31,7 +32,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class SecurityConfig {
     private final Filter jwtAuthFilter;
-    private final UserDao userDao;
+    private final UserRepository userRepository;
 
     @Bean
     public SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
@@ -65,8 +66,7 @@ public class SecurityConfig {
 
     @Bean
     public PasswordEncoder passwordEncoder() {
-        // return new BCryptPasswordEncoder();
-        return NoOpPasswordEncoder.getInstance();
+        return new BCryptPasswordEncoder();
     }
 
     @Bean
@@ -74,7 +74,12 @@ public class SecurityConfig {
         return new UserDetailsService() {
             @Override
             public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-                return userDao.findUserByEmail(email);
+                final com.example.carwashfacility.models.User appUser = userRepository.findUserByEmail(email);
+                return new User(
+                        appUser.getEmail(),
+                        appUser.getPassword(),
+                        Collections.singleton(new SimpleGrantedAuthority(appUser.getRole()))
+                );
             }
         };
     }
