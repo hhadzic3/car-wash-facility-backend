@@ -36,7 +36,6 @@ public class UserController {
         user.setNumberOdWashes(0);
         user.setActive(true);
         user.setRole(request.getRole());
-        //System.out.println(user);
         if (request.getRole().equals("USER") && request.getRole().equals("ADMIN"))
             return ResponseEntity.badRequest().body("Role error");
         try {

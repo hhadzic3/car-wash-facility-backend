@@ -26,13 +26,9 @@ import java.util.Collections;
 @RequiredArgsConstructor
 public class AuthenticationController {
     private final AuthenticationManager authentificationManager;
-
+    @Autowired
     private final UserService userService;
     private final JwtUtils jwtUtils;
-
-    private final PasswordEncoder passwordEncoder;
-
-
 
     @PostMapping("/login")
     public ResponseEntity<String> authenticate(
