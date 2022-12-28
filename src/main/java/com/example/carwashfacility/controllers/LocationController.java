@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/location")
+@RequestMapping("/api/location")
 public class LocationController {
     @Autowired
     LocationRepository locationRepository;
@@ -36,7 +36,7 @@ public class LocationController {
      * @param id
      * @return ResponseEntity
      */
-    @GetMapping("/location/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Location> getLocationById(@PathVariable("id") long id) {
         try {
             //check if location exist in database
@@ -60,7 +60,7 @@ public class LocationController {
      * @param location
      * @return ResponseEntity
      */
-    @PostMapping("/location")
+    @PostMapping
     public ResponseEntity<Location> newLocation(@RequestBody Location location) {
         Location newLocation = locationRepository
                 .save(Location.builder()
@@ -76,7 +76,7 @@ public class LocationController {
      * @param location
      * @return
      */
-    @PutMapping("/location/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<Location> updateLocation(@PathVariable("id") long id, @RequestBody Location location) {
 
         //check if location exist in database
@@ -96,7 +96,7 @@ public class LocationController {
      * @param id
      * @return ResponseEntity
      */
-    @DeleteMapping("/location/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<HttpStatus> deleteLocationById(@PathVariable("id") long id) {
         try {
             //check if location exist in database
@@ -120,7 +120,7 @@ public class LocationController {
      *
      * @return ResponseEntity
      */
-    @DeleteMapping("/locations")
+    @DeleteMapping
     public ResponseEntity<HttpStatus> deleteAllLocations() {
         try {
             locationRepository.deleteAll();
