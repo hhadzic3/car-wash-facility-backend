@@ -18,11 +18,13 @@ public class PackageStep {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name = "package_id", nullable = false)
-    private long packageId;
+    @ManyToOne
+    @JoinColumn(name = "package_id", nullable = false)
+    private Package pack;
 
-    @Column(name = "step_id", nullable = false)
-    private long stepId;
+    @ManyToOne
+    @JoinColumn(name = "step_id", nullable = false)
+    private Step step;
 
     @Column(name = "sequence_number", nullable = false)
     private Integer sequenceNumber;

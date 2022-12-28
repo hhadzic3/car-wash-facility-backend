@@ -20,14 +20,17 @@ public class Washing {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name = "location_id", nullable = false)
-    private long locationId;
+    @ManyToOne
+    @JoinColumn(name = "location_id", nullable = false)
+    private Location location;
 
-    @Column(name = "package_id", nullable = false)
-    private long packageId;
+    @ManyToOne
+    @JoinColumn(name = "package_id", nullable = false)
+    private Package pack;
 
-    @Column(name = "user_id", nullable = false)
-    private long userId;
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
 
     @Column(name = "time", nullable = false)
     private Date time;

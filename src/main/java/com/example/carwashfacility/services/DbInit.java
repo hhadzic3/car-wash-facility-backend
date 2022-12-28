@@ -21,21 +21,22 @@ public class DbInit implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        this.userRepository.deleteAll();
+       /* this.userRepository.deleteAll();
 
         // Crete users
         User dan = new User(
-                1,
+                1L,
                 "dan@gamil.com",
                 passwordEncoder.encode("dan123"),
                 true,
-                "USER"
+                "USER",
+                0
         );
-        User admin = new User(2,"admin@gmail.com",passwordEncoder.encode("admin123"),true,"ADMIN");
+        User admin = new User(2L,"admin@gmail.com",passwordEncoder.encode("admin123"),true,"ADMIN",0);
 
         List<User> users = Arrays.asList(dan,admin);
 
         // Save to db
-        this.userRepository.saveAll(users);
+        this.userRepository.saveAll(users);*/
     }
 }

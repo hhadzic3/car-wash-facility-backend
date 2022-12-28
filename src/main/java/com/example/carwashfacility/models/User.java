@@ -27,4 +27,7 @@ public class User {
     private boolean active;
 
     private String role;
+
+    @Column(name = "number_of_washes")
+    private Integer numberOdWashes;
 }

@@ -1,10 +1,13 @@
 package com.example.carwashfacility.controllers;
 
 import com.example.carwashfacility.dtos.AuthentificationRequestDto;
+import com.example.carwashfacility.dtos.RegisterRequestDto;
 import com.example.carwashfacility.models.User;
 import com.example.carwashfacility.repositories.UserRepository;
+import com.example.carwashfacility.services.UserService;
 import com.example.carwashfacility.utils.JwtUtils;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -22,14 +25,16 @@ import java.util.Collections;
 @RequestMapping("/api/auth")
 @RequiredArgsConstructor
 public class AuthenticationController {
-
     private final AuthenticationManager authentificationManager;
-    private final UserRepository userRepository;
+
+    private final UserService userService;
     private final JwtUtils jwtUtils;
 
     private final PasswordEncoder passwordEncoder;
 
-    @PostMapping("/authenticate")
+
+
+    @PostMapping("/login")
     public ResponseEntity<String> authenticate(
             @RequestBody AuthentificationRequestDto request
     ){
@@ -37,7 +42,7 @@ public class AuthenticationController {
                  request.getEmail(),
                  request.getPassword()
          ));
-         final User appUser = userRepository.findUserByEmail(request.getEmail());
+         final User appUser = userService.findUserByEmail(request.getEmail());
          if (appUser != null){
              final UserDetails user = new org.springframework.security.core.userdetails.User(
                      appUser.getEmail(),
@@ -48,4 +53,5 @@ public class AuthenticationController {
          }
          return ResponseEntity.badRequest().body("Error");
     }
+
 }
