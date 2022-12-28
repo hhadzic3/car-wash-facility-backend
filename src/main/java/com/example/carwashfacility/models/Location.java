@@ -7,24 +7,17 @@ import lombok.Setter;
 
 import javax.persistence.*;
 
-@Entity
 @Table
-@Getter
-@Setter
+@Entity
 @AllArgsConstructor
 @NoArgsConstructor
-public class User {
+@Setter
+@Getter
+public class Location {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(nullable = false, unique = true)
-    private String email;
-
     @Column(nullable = false)
-    private String password;
-
-    private boolean active;
-
-    private String role;
+    private String name;
 }
