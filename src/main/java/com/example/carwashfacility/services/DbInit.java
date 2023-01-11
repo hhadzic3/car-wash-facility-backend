@@ -21,7 +21,7 @@ public class DbInit implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-       /* this.userRepository.deleteAll();
+        /*this.userRepository.deleteAll();
 
         // Crete users
         User dan = new User(
@@ -32,9 +32,17 @@ public class DbInit implements CommandLineRunner {
                 "USER",
                 0
         );
+        User aco = new User(
+                3L,
+                "aco@gamil.com",
+                passwordEncoder.encode("acoaco"),
+                true,
+                "USER",
+                0
+        );
         User admin = new User(2L,"admin@gmail.com",passwordEncoder.encode("admin123"),true,"ADMIN",0);
 
-        List<User> users = Arrays.asList(dan,admin);
+        List<User> users = Arrays.asList(dan,admin,aco);
 
         // Save to db
         this.userRepository.saveAll(users);*/

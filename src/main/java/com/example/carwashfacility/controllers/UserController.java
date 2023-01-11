@@ -29,6 +29,7 @@ public class UserController {
     }
 
     @PostMapping("/register")
+    @CrossOrigin
     public ResponseEntity<String> register(@RequestBody User request) {
         User user = new User();
         user.setEmail(request.getEmail());
@@ -43,7 +44,7 @@ public class UserController {
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.toString());
         }
-        return ResponseEntity.badRequest().body("OK");
+        return ResponseEntity.ok().body("OK");
     }
 
 }

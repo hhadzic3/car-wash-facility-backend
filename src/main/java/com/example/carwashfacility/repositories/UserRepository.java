@@ -10,8 +10,5 @@ import java.util.List;
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
     User findUserByEmail(String email);
-    @Query(
-            value = "SELECT * FROM user u WHERE u.role = USER",
-            nativeQuery = true)
-    List<User> findAllUsers();
+    List<User> findByRole(String role);
 }
