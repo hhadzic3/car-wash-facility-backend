@@ -26,6 +26,7 @@ public class AuthenticationController {
     @Autowired
     private final UserService userService;
     private final JwtUtils jwtUtils;
+    private final PasswordEncoder passwordEncoder;
 
     @PostMapping("/login")
     @CrossOrigin
@@ -46,6 +47,25 @@ public class AuthenticationController {
             return ResponseEntity.ok(jwtUtils.generateToken(user));
          }
          return ResponseEntity.badRequest().body("Error");
+    }
+
+    @PostMapping("/register")
+    @CrossOrigin
+    public ResponseEntity<String> register(@RequestBody User request) {
+        User user = new User();
+        user.setEmail(request.getEmail());
+        user.setPassword(passwordEncoder.encode(request.getPassword()));
+        user.setNumberOdWashes(0);
+        user.setActive(true);
+        user.setRole(request.getRole());
+        if (request.getRole().equals("USER") && request.getRole().equals("ADMIN"))
+            return ResponseEntity.badRequest().body("Role error");
+        try {
+            userService.save(user);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.toString());
+        }
+        return ResponseEntity.ok().body("OK");
     }
 
 }

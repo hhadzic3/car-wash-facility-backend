@@ -29,7 +29,6 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import javax.servlet.Filter;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.List;
 
 @EnableWebSecurity
 @RequiredArgsConstructor
@@ -43,7 +42,6 @@ public class SecurityConfig {
                 .csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/**/auth/**").permitAll()
-                .antMatchers("/**/register").permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()
@@ -91,7 +89,7 @@ public class SecurityConfig {
     CorsConfigurationSource corsConfigurationSource() {
         final CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowedOriginPatterns(Arrays.asList("*"));
-        configuration.setAllowedMethods(Arrays.asList("HEAD", "GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"));
+        configuration.setAllowedMethods(Arrays.asList("HEAD", "GET", "POST", "PUT", "DELETE"));
         configuration.setAllowCredentials(true);
         configuration.setAllowedHeaders(Arrays.asList("*"));
         configuration.setExposedHeaders(Arrays.asList("X-Auth-Token", "Authorization", "Access-Control-Allow-Origin",
