@@ -1,12 +1,16 @@
 package com.example.carwashfacility.controllers;
 
+import com.example.carwashfacility.dtos.PackageDto;
 import com.example.carwashfacility.models.Package;
+import com.example.carwashfacility.models.PackageStep;
 import com.example.carwashfacility.repositories.PackageRepository;
+import com.example.carwashfacility.repositories.PackageStepRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,10 +20,21 @@ public class PackageController {
     @Autowired
     PackageRepository packageRepository;
 
+    @Autowired
+    PackageStepRepository packageStepRepository;
+
     @GetMapping
-    public ResponseEntity<List<Package>> getPackages() {
+    public ResponseEntity<List<PackageDto>> getPackages() {
         try {
-            return new ResponseEntity<>(packageRepository.findAll(), HttpStatus.OK);
+            List<Package> packages = packageRepository.findAll();
+            List<PackageDto> packageDtos = new ArrayList<PackageDto>();
+            for (Package aPackage : packages) {
+                List<PackageStep> packageStep = packageStepRepository.findByPack(aPackage);
+                PackageDto p = new PackageDto(aPackage.getId(), aPackage.getName(), aPackage.getCost(), packageStep);
+                packageDtos.add(p);
+            }
+
+            return new ResponseEntity<>(packageDtos, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
