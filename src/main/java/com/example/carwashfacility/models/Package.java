@@ -1,8 +1,8 @@
 package com.example.carwashfacility.models;
 
 import lombok.*;
-
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table
@@ -16,7 +16,7 @@ public class Package {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String name;
 
     @Column(nullable = false)
