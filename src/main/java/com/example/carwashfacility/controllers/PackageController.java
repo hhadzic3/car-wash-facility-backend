@@ -19,7 +19,6 @@ import java.util.Optional;
 public class PackageController {
     @Autowired
     PackageRepository packageRepository;
-
     @Autowired
     PackageStepRepository packageStepRepository;
 
@@ -33,7 +32,6 @@ public class PackageController {
                 PackageDto p = new PackageDto(aPackage.getId(), aPackage.getName(), aPackage.getCost(), packageStep);
                 packageDtos.add(p);
             }
-
             return new ResponseEntity<>(packageDtos, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
