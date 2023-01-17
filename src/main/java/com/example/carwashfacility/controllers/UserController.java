@@ -1,6 +1,7 @@
 package com.example.carwashfacility.controllers;
 
 import com.example.carwashfacility.dtos.RegisterRequestDto;
+import com.example.carwashfacility.dtos.UsersWithActivitiesDto;
 import com.example.carwashfacility.models.User;
 import com.example.carwashfacility.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,7 @@ public class UserController {
         this.userService = userService;
     }
     @GetMapping
-    public List<User> getUsers() {
+    public List<UsersWithActivitiesDto> getUsers() {
         return userService.findAllUsers();
     }
 }
