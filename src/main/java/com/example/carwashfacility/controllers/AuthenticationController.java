@@ -42,7 +42,7 @@ public class AuthenticationController {
              final UserDetails user = new org.springframework.security.core.userdetails.User(
                      appUser.getEmail(),
                      appUser.getPassword(),
-                     Collections.singleton(new SimpleGrantedAuthority(appUser.getRole()))
+                     Collections.singleton(new SimpleGrantedAuthority(appUser.getRole().toString()))
              );
             return ResponseEntity.ok(jwtUtils.generateToken(user));
          }
@@ -58,7 +58,7 @@ public class AuthenticationController {
         user.setNumberOdWashes(0);
         user.setActive(true);
         user.setRole(request.getRole());
-        if (request.getRole().equals("USER") && request.getRole().equals("ADMIN"))
+        if (!request.getRole().toString().equals("ROLE_USER") && !request.getRole().toString().equals("ROLE_ADMIN"))
             return ResponseEntity.badRequest().body("Role error");
         try {
             userService.save(user);

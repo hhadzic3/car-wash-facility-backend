@@ -31,7 +31,7 @@ public class UserService {
     }
 
     public List<UsersWithActivitiesDto> findAllUsers() {
-        List<User> users = userRepository.findByRole("USER");
+        List<User> users = userRepository.findByRole(User.Role.ROLE_USER);
         List<UsersWithActivitiesDto> usersDtos = new ArrayList<UsersWithActivitiesDto>();
         for (User u : users) {
             List<Washing> washings = washingRepository.findByUser(u);

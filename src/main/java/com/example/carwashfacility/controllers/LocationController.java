@@ -5,6 +5,7 @@ import com.example.carwashfacility.repositories.LocationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,6 +23,7 @@ public class LocationController {
      * @return ResponseEntity
      */
     @GetMapping
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
     public ResponseEntity<List<Location>> getLocations() {
         try {
             return new ResponseEntity<>(locationRepository.findAll(), HttpStatus.OK);
@@ -37,6 +39,7 @@ public class LocationController {
      * @return ResponseEntity
      */
     @GetMapping("/{id}")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
     public ResponseEntity<Location> getLocationById(@PathVariable("id") long id) {
         try {
             //check if location exist in database
@@ -61,6 +64,7 @@ public class LocationController {
      * @return ResponseEntity
      */
     @PostMapping
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     public ResponseEntity<Location> newLocation(@RequestBody Location location) {
         Location newLocation = locationRepository
                 .save(Location.builder()
@@ -77,6 +81,7 @@ public class LocationController {
      * @return
      */
     @PutMapping("/{id}")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     public ResponseEntity<Location> updateLocation(@PathVariable("id") long id, @RequestBody Location location) {
 
         //check if location exist in database
@@ -97,6 +102,7 @@ public class LocationController {
      * @return ResponseEntity
      */
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     public ResponseEntity<HttpStatus> deleteLocationById(@PathVariable("id") long id) {
         try {
             //check if location exist in database
@@ -121,6 +127,7 @@ public class LocationController {
      * @return ResponseEntity
      */
     @DeleteMapping
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     public ResponseEntity<HttpStatus> deleteAllLocations() {
         try {
             locationRepository.deleteAll();

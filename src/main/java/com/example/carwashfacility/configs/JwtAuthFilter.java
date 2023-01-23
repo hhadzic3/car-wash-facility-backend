@@ -50,7 +50,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
             UserDetails userDetails = new User(
                     appUser.getEmail(),
                     appUser.getPassword(),
-                    Collections.singleton(new SimpleGrantedAuthority(appUser.getRole()))
+                    Collections.singleton(new SimpleGrantedAuthority(appUser.getRole().toString()))
             );
             if (jwtUtils.validateToken(jwtToken, userDetails)) {
                 UsernamePasswordAuthenticationToken authToken =

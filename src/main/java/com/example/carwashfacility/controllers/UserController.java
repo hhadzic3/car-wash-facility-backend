@@ -6,6 +6,7 @@ import com.example.carwashfacility.models.User;
 import com.example.carwashfacility.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,6 +22,7 @@ public class UserController {
         this.userService = userService;
     }
     @GetMapping
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     public List<UsersWithActivitiesDto> getUsers() {
         return userService.findAllUsers();
     }

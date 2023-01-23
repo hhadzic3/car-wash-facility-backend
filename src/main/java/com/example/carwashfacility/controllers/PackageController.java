@@ -8,8 +8,10 @@ import com.example.carwashfacility.repositories.PackageStepRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.security.RolesAllowed;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -23,6 +25,7 @@ public class PackageController {
     PackageStepRepository packageStepRepository;
 
     @GetMapping
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
     public ResponseEntity<List<PackageDto>> getPackages() {
         try {
             List<Package> packages = packageRepository.findAll();
@@ -39,6 +42,7 @@ public class PackageController {
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
     public ResponseEntity<Package> getPackageById(@PathVariable("id") long id) {
         try {
             //check if package exist in database
@@ -57,6 +61,7 @@ public class PackageController {
     }
 
     @PostMapping
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     public ResponseEntity<Package> newPackage(@RequestBody Package pack) {
         Package newPackage = packageRepository
                 .save(Package.builder()
@@ -67,6 +72,7 @@ public class PackageController {
     }
 
     @PutMapping("/{id}")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     public ResponseEntity<Package> updatePackage(@PathVariable("id") long id, @RequestBody Package pack) {
 
         //check if pack exist in database
@@ -82,6 +88,7 @@ public class PackageController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     public ResponseEntity<HttpStatus> deletePackageById(@PathVariable("id") long id) {
         try {
             //check if package exist in database
@@ -100,6 +107,7 @@ public class PackageController {
     }
 
     @DeleteMapping
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     public ResponseEntity<HttpStatus> deleteAllPackages() {
         try {
             packageRepository.deleteAll();

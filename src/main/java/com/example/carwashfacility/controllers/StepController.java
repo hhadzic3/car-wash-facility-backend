@@ -5,8 +5,10 @@ import com.example.carwashfacility.repositories.StepRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.security.RolesAllowed;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,6 +19,7 @@ public class StepController {
     StepRepository stepRepository;
 
     @GetMapping
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
     public ResponseEntity<List<Step>> getSteps() {
         try {
             return new ResponseEntity<>(stepRepository.findAll(), HttpStatus.OK);
@@ -26,6 +29,7 @@ public class StepController {
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
     public ResponseEntity<Step> getStepById(@PathVariable("id") long id) {
         try {
             //check if step exist in database
@@ -44,6 +48,7 @@ public class StepController {
     }
 
     @PostMapping
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     public ResponseEntity<Step> newStep(@RequestBody Step step) {
         Step newStep = stepRepository
                 .save(Step.builder()
@@ -53,6 +58,7 @@ public class StepController {
     }
 
     @PutMapping("/{id}")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     public ResponseEntity<Step> updateStep(@PathVariable("id") long id, @RequestBody Step step) {
 
         //check if step exist in database
@@ -67,6 +73,7 @@ public class StepController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     public ResponseEntity<HttpStatus> deleteStepById(@PathVariable("id") long id) {
         try {
             //check if step exist in database
@@ -85,6 +92,7 @@ public class StepController {
     }
 
     @DeleteMapping
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     public ResponseEntity<HttpStatus> deleteAllSteps() {
         try {
             stepRepository.deleteAll();

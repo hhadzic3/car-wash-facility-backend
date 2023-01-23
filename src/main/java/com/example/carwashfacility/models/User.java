@@ -24,7 +24,12 @@ public class User {
 
     private boolean active;
 
-    private String role;
+    public enum Role {
+        ROLE_USER, ROLE_ADMIN
+    }
+
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
     @Column(name = "number_of_washes")
     private Integer numberOdWashes;

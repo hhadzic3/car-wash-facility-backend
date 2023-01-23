@@ -5,6 +5,7 @@ import com.example.carwashfacility.repositories.WashingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,6 +23,7 @@ public class WashingController {
      * @return ResponseEntity
      */
     @GetMapping
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
     public ResponseEntity<List<Washing>> getWashings() {
         try {
             return new ResponseEntity<>(washingRepository.findAll(), HttpStatus.OK);
@@ -37,6 +39,7 @@ public class WashingController {
      * @return ResponseEntity
      */
     @GetMapping("/{id}")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
     public ResponseEntity<Washing> getWashingById(@PathVariable("id") long id) {
         try {
             //check if washing exist in database
@@ -61,6 +64,7 @@ public class WashingController {
      * @return ResponseEntity
      */
     @PostMapping
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
     public ResponseEntity<Washing> newWashing(@RequestBody Washing washing) {
         Washing newWashing = washingRepository
                 .save(Washing.builder()
@@ -80,6 +84,7 @@ public class WashingController {
      * @return
      */
     @PutMapping("/{id}")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     public ResponseEntity<Washing> updateWashing(@PathVariable("id") long id, @RequestBody Washing washing) {
 
         //check if washing exist in database
@@ -103,6 +108,7 @@ public class WashingController {
      * @return ResponseEntity
      */
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     public ResponseEntity<HttpStatus> deleteWashingById(@PathVariable("id") long id) {
         try {
             //check if washing exist in database
@@ -127,6 +133,7 @@ public class WashingController {
      * @return ResponseEntity
      */
     @DeleteMapping
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     public ResponseEntity<HttpStatus> deleteAllWashings() {
         try {
             washingRepository.deleteAll();

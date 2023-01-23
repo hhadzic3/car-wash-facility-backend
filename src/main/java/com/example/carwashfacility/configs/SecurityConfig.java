@@ -8,6 +8,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.ExpressionUrlAuthorizationConfigurer;
@@ -32,6 +33,7 @@ import java.util.Collections;
 
 @EnableWebSecurity
 @RequiredArgsConstructor
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig {
     private final Filter jwtAuthFilter;
     private final UserRepository userRepository;
@@ -79,7 +81,7 @@ public class SecurityConfig {
                 return new User(
                         appUser.getEmail(),
                         appUser.getPassword(),
-                        Collections.singleton(new SimpleGrantedAuthority(appUser.getRole()))
+                        Collections.singleton(new SimpleGrantedAuthority(appUser.getRole().toString()))
                 );
             }
         };
