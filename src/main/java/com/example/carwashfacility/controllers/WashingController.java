@@ -1,19 +1,26 @@
 package com.example.carwashfacility.controllers;
 
+import com.example.carwashfacility.dtos.CreateWashingDto;
 import com.example.carwashfacility.models.Washing;
 import com.example.carwashfacility.repositories.WashingRepository;
+import com.example.carwashfacility.services.WashingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/washing")
 public class WashingController {
+
+    @Autowired
+    WashingService washingService;
+
     @Autowired
     WashingRepository washingRepository;
 
@@ -60,19 +67,15 @@ public class WashingController {
     /**
      * Create new washing
      *
-     * @param washing
+     * @param washingDto
      * @return ResponseEntity
      */
     @PostMapping
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
-    public ResponseEntity<Washing> newWashing(@RequestBody Washing washing) {
-        Washing newWashing = washingRepository
-                .save(Washing.builder()
-                        .user(washing.getUser())
-                        .location(washing.getLocation())
-                        .pack(washing.getPack())
-                        .time(washing.getTime())
-                        .build());
+    public ResponseEntity<Washing> newWashing(@RequestBody CreateWashingDto washingDto) {
+
+        Washing newWashing = washingService.save(washingDto);
+
         return new ResponseEntity<>(newWashing, HttpStatus.OK);
     }
 
