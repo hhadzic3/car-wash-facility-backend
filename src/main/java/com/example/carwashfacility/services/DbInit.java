@@ -35,9 +35,9 @@ public class DbInit implements CommandLineRunner {
     public void run(String... args) throws Exception {
         /*
         this.userRepository.deleteAll();
-        User dan = new User(1, "dan@gamil.com", passwordEncoder.encode("dan123"), true, "USER", 0);
-        User aco = new User(3, "aco@gamil.com", passwordEncoder.encode("acoaco"), true, "USER", 0);
-        User admin = new User(2,"admin@gmail.com",passwordEncoder.encode("admin123"),true,"ADMIN",0);
+        User dan = new User(1, "harun@gmail.com", passwordEncoder.encode("password"), true, User.Role.ROLE_USER, 0);
+        User aco = new User(3, "aco@gmail.com", passwordEncoder.encode("password"), true, User.Role.ROLE_USER, 0);
+        User admin = new User(2,"admin@gmail.com",passwordEncoder.encode("password"),true, User.Role.ROLE_ADMIN,0);
         List<User> users = Arrays.asList(dan,admin,aco);
         this.userRepository.saveAll(users);
 
@@ -61,9 +61,9 @@ public class DbInit implements CommandLineRunner {
         this.stepRepository.saveAll(steps);
 
         this.packageRepository.deleteAll();
-        Package package1 = new Package(1, "Amater", 90.0);
+        Package package1 = new Package(1, "Basic", 90.0);
         Package package2 = new Package(2, "Pro", 100.0);
-        Package package3 = new Package(3, "Top ligue", 120.0);
+        Package package3 = new Package(3, "Top League", 120.0);
         Package package4 = new Package(4, "King treatment", 150.0);
         List<Package> packages = Arrays.asList(package1, package2, package3, package4);
         this.packageRepository.saveAll(packages);
@@ -76,9 +76,14 @@ public class DbInit implements CommandLineRunner {
         PackageStep packageStep5 = new PackageStep(5, package2, step4, 2);
         PackageStep packageStep6 = new PackageStep(6, package2, step6, 3);
         PackageStep packageStep7 = new PackageStep(7, package3, step1, 1);
-        PackageStep packageStep8 = new PackageStep(8, package3, step7, 2);
+        PackageStep packageStep8 = new PackageStep(8, package3, step3, 2);
+        PackageStep packageStep9 = new PackageStep(9, package3, step7, 3);
+        PackageStep packageStep10 = new PackageStep(10, package4, step2, 1);
+        PackageStep packageStep11 = new PackageStep(11, package4, step3, 2);
+        PackageStep packageStep12 = new PackageStep(12, package4, step4, 3);
         List<PackageStep> packageSteps = Arrays.asList(packageStep1, packageStep2, packageStep3,
-                packageStep4, packageStep5, packageStep6, packageStep7, packageStep8);
+                packageStep4, packageStep5, packageStep6, packageStep7, packageStep8, packageStep9,
+                packageStep10, packageStep11, packageStep12);
         packageStepRepository.saveAll(packageSteps);
 
         this.washingRepository.deleteAll();
