@@ -20,10 +20,11 @@ What you need to install the software and how to install them:
 
 1. Clone the repository to your local machine
 2. Open the project in your IDE and configure the database connection properties in `src/main/resources/application.properties`.
-3. Build the project using Maven
-4. Run the project
+3. Create DB (using tool like PgAdmin)
+4. Build the project using Maven
+5. Run the project
 
 ### Acknowledgments
-
+- In `src/main/java/carwashfacility/services/DbInit` is DB initializer service (for creating initial data in DB). After first run this file should be commented !
 - [Spring Initializer](https://start.spring.io/) - Used to generate the initial project structure
 - [Spring Data JPA Guide](https://spring.io/guides/gs/accessing-data-jpa/) - Used as a reference for configuring Data JPA

@@ -33,13 +33,14 @@ public class DbInit implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        /*
+        // 1) Create DB (using tool like PgAdmin)
+        // 2) Delete all tables from DB before initialize
         this.packageStepRepository.deleteAll();
         this.washingRepository.deleteAll();
-        this.userRepository.deleteAll();
-        this.locationRepository.deleteAll();
         this.stepRepository.deleteAll();
         this.packageRepository.deleteAll();
+        this.locationRepository.deleteAll();
+        this.userRepository.deleteAll();
 
         User dan = new User(1, "harun@gmail.com", passwordEncoder.encode("password"), true, User.Role.ROLE_USER, 0);
         User aco = new User(3, "aco@gmail.com", passwordEncoder.encode("password"), true, User.Role.ROLE_USER, 0);
@@ -94,6 +95,5 @@ public class DbInit implements CommandLineRunner {
                 new Washing(3, location3, package3, aco, new Date())
                 );
         washingRepository.saveAll(washings);
-        */
     }
 }
