@@ -34,21 +34,25 @@ public class DbInit implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         /*
+        this.packageStepRepository.deleteAll();
+        this.washingRepository.deleteAll();
         this.userRepository.deleteAll();
+        this.locationRepository.deleteAll();
+        this.stepRepository.deleteAll();
+        this.packageRepository.deleteAll();
+
         User dan = new User(1, "harun@gmail.com", passwordEncoder.encode("password"), true, User.Role.ROLE_USER, 0);
         User aco = new User(3, "aco@gmail.com", passwordEncoder.encode("password"), true, User.Role.ROLE_USER, 0);
         User admin = new User(2,"admin@gmail.com",passwordEncoder.encode("password"),true, User.Role.ROLE_ADMIN,0);
         List<User> users = Arrays.asList(dan,admin,aco);
         this.userRepository.saveAll(users);
 
-        this.locationRepository.deleteAll();
         Location location1 = new Location(1, "BiH, Sarajevo, Vranik");
         Location location2 = new Location(2, "BiH, Sarajevo, Hrasno");
         Location location3 = new Location(3, "BiH, Sarajevo, Ilidža, Pejton");
         List<Location> locations = Arrays.asList(location1, location2, location3);
         this.locationRepository.saveAll(locations);
 
-        this.stepRepository.deleteAll();
         Step step1 = new Step(1, "Pre-Soak");
         Step step2 = new Step(2, "Wash");
         Step step3 = new Step(3, "Wax");
@@ -60,7 +64,6 @@ public class DbInit implements CommandLineRunner {
         List<Step> steps = Arrays.asList(step1, step2, step3, step4, step5, step6, step7, step8);
         this.stepRepository.saveAll(steps);
 
-        this.packageRepository.deleteAll();
         Package package1 = new Package(1, "Basic", 90.0);
         Package package2 = new Package(2, "Pro", 100.0);
         Package package3 = new Package(3, "Top League", 120.0);
@@ -68,7 +71,6 @@ public class DbInit implements CommandLineRunner {
         List<Package> packages = Arrays.asList(package1, package2, package3, package4);
         this.packageRepository.saveAll(packages);
 
-        this.packageStepRepository.deleteAll();
         PackageStep packageStep1 = new PackageStep(1, package1, step1, 1);
         PackageStep packageStep2 = new PackageStep(2, package1, step2, 2);
         PackageStep packageStep3 = new PackageStep(3, package1, step8, 3);
@@ -86,7 +88,6 @@ public class DbInit implements CommandLineRunner {
                 packageStep10, packageStep11, packageStep12);
         packageStepRepository.saveAll(packageSteps);
 
-        this.washingRepository.deleteAll();
         List<Washing> washings = Arrays.asList(
                 new Washing(1, location1, package2, aco, new Date()),
                 new Washing(2, location2, package1, aco, new Date()),
