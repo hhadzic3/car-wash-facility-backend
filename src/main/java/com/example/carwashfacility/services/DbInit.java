@@ -34,13 +34,7 @@ public class DbInit implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         // 1) Create DB (using tool like PgAdmin)
-        // 2) Delete all tables from DB before initialize
-        this.packageStepRepository.deleteAll();
-        this.washingRepository.deleteAll();
-        this.stepRepository.deleteAll();
-        this.packageRepository.deleteAll();
-        this.locationRepository.deleteAll();
-        this.userRepository.deleteAll();
+        // 2) Delete all tables from DB (using tool) before initialize
 
         User dan = new User(1, "harun@gmail.com", passwordEncoder.encode("password"), true, User.Role.ROLE_USER, 0);
         User aco = new User(3, "aco@gmail.com", passwordEncoder.encode("password"), true, User.Role.ROLE_USER, 0);

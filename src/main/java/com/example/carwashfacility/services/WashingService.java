@@ -39,8 +39,9 @@ public class WashingService {
 
         Optional<Package> optionalPackage = packageRepository.findById(washingDto.getPack());
         Package pack = optionalPackage.orElseThrow();
-
-        user.setNumberOdWashes(user.getNumberOdWashes()+1);
+        if (user.getNumberOdWashes()+1 == 10)
+            user.setNumberOdWashes(0);
+        else user.setNumberOdWashes(user.getNumberOdWashes()+1);
         userRepository.save(user);
 
         return washingRepository
