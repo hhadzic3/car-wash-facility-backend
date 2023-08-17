@@ -4,6 +4,7 @@ import com.example.carwashfacility.models.*;
 import com.example.carwashfacility.models.Package;
 import com.example.carwashfacility.repositories.*;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.annotation.Profile;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -31,6 +32,7 @@ public class DbInit implements CommandLineRunner {
         this.washingRepository = washingRepository;
     }
 
+    @Profile("dev")
     @Override
     public void run(String... args) throws Exception {
         // 1) Create DB (using tool like PgAdmin)
@@ -45,7 +47,8 @@ public class DbInit implements CommandLineRunner {
         Location location1 = new Location(1, "BiH, Sarajevo, Vranik");
         Location location2 = new Location(2, "BiH, Sarajevo, Hrasno");
         Location location3 = new Location(3, "BiH, Sarajevo, Ilidža, Pejton");
-        List<Location> locations = Arrays.asList(location1, location2, location3);
+        Location location4 = new Location(4, "Austria, Vienna, Landstrase");
+        List<Location> locations = Arrays.asList(location1, location2, location3, location4);
         this.locationRepository.saveAll(locations);
 
         Step step1 = new Step(1, "Pre-Soak");
