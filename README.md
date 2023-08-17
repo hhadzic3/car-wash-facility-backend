@@ -31,6 +31,7 @@ What you need to install the software and how to install them:
 
 ## Env
 
+Elephant SQL:
 ```properties
 spring_profiles_active=prod
 DB_HOST=trumpet.db.elephantsql.com
@@ -38,4 +39,14 @@ DB_PORT=5432
 DB_NAME=krftoqpd
 DB_PASSWORD=vDU73jeZeJOBE13Q2_wN6vfrjRKCEKdh
 DB_USERNAME=krftoqpd
+```
+
+Railway PostgreSQL:
+```properties
+spring_profiles_active=prod
+DB_HOST=containers-us-west-169.railway.app
+DB_PORT=6909
+DB_NAME=railway
+DB_PASSWORD=dFATBRHm25GMXcrd34fS
+DB_USERNAME=postgres
 ```
