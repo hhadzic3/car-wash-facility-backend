@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/location")
+@RequestMapping("/api/locations")
 public class LocationController {
     @Autowired
     LocationRepository locationRepository;
@@ -22,8 +22,7 @@ public class LocationController {
      *
      * @return ResponseEntity
      */
-    @GetMapping
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
+    @GetMapping("/get")
     public ResponseEntity<List<Location>> getLocations() {
         try {
             return new ResponseEntity<>(locationRepository.findAll(), HttpStatus.OK);
