@@ -28,3 +28,14 @@ What you need to install the software and how to install them:
 - In `src/main/java/carwashfacility/services/DbInit` is DB initializer service (for creating initial data in DB). After first run this file should be commented !
 - [Spring Initializer](https://start.spring.io/) - Used to generate the initial project structure
 - [Spring Data JPA Guide](https://spring.io/guides/gs/accessing-data-jpa/) - Used as a reference for configuring Data JPA
+
+## Env
+
+```properties
+spring_profiles_active=prod
+DB_HOST=trumpet.db.elephantsql.com
+DB_PORT=5432
+DB_NAME=krftoqpd
+DB_PASSWORD=vDU73jeZeJOBE13Q2_wN6vfrjRKCEKdh
+DB_USERNAME=krftoqpd
+```
