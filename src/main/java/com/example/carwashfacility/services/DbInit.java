@@ -89,5 +89,6 @@ public class DbInit implements CommandLineRunner {
                 new Washing(3, location3, package3, aco, new Date())
                 );
         washingRepository.saveAll(washings);
+
     }
 }
